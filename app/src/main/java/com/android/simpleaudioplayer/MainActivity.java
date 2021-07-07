@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer song;
     private Button playPause;
     private AudioManager audio;
-    private SeekBar volume;
+    SeekBar volume;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         audio = (AudioManager) getSystemService(AUDIO_SERVICE);
         int maxVolume = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         song = MediaPlayer.create(this,R.raw.tareefan);
-        playPause = (Button)findViewById(R.id.playPause);
-        volume = (SeekBar) findViewById(R.id.volume);
+        playPause = findViewById(R.id.playPause);
+        volume = findViewById(R.id.volume);
         volume.setMax(maxVolume);
         volume.setProgress(audio.getStreamVolume(AudioManager.STREAM_MUSIC));
         playPause.setBackgroundColor(getColor(R.color.colorPrimaryDark));
@@ -47,16 +47,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         
-        playPause.setText("Play");
+        playPause.setText(R.string.play_text);
     }
     public void setPlayPause(View v){
         if(song.isPlaying()){
             song.pause();
-            playPause.setText("Play");
+            playPause.setText(R.string.play_text);
         }
         else if(!song.isPlaying()){
             song.start();
-            playPause.setText("Pause");
+            playPause.setText(R.string.pause_text);
         }
     }
 }
